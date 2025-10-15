@@ -12,7 +12,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -41,6 +44,8 @@ public class Jogo {
     private ArrayList<Jogador> jogadores;
 
     private boolean jogoTerminou=false;
+
+    private boolean modo_debug=false;
 
     @FXML
     private Label somaDados;
@@ -124,12 +129,42 @@ public class Jogo {
         mostrarPopUp("Turno Atual", "Jogador "+mostrarCor(jogadores.get(jogadorAtual)));
     }
 
+    @FXML
+    void debug(KeyEvent event) throws Exception{
+        if(event.getCode()==KeyCode.D){
+            modo_debug=true;
+            turno();
+            if(jogoTerminou){
+                Parent root = FXMLLoader.load(getClass().getResource("TelaFinal.fxml"));
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+            stage.show();
+        }
+        }
+        jogarDados.setVisible(false);
+        proxJogador.setVisible(true);
+    }
+
     private void mostrarPopUp(String titulo, String mensagem) {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle(titulo);
         alert.setHeaderText(null); // sem título interno
         alert.setContentText(mensagem);
         alert.showAndWait();
+    }
+
+    private int modoDebug(){
+        Alert alert=new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Modo Debug");
+        alert.setHeaderText("Insira a casa que deseja ir: ");
+        TextField casa=new TextField();
+        casa.setPromptText("Ex.: 27");
+        VBox vbox=new VBox(casa);
+        alert.getDialogPane().setContent(vbox);
+        alert.showAndWait();
+        int selecionado=Integer.parseInt(casa.getText());
+        return selecionado;
     }
 
     private int jogadorParaInicio(Jogador jogador){
@@ -178,6 +213,12 @@ public class Jogo {
         casas.get(jogador.getPontuacao()).getChildren().add(jogador);
     }
 
+    private void moverJogador(Jogador jogador, int casaAntiga, int casaAtual){
+        casas.get(casaAntiga).getChildren().remove(jogador);
+        jogador.setPontuacao(casaAtual);
+        casas.get(jogador.getPontuacao()).getChildren().add(jogador);
+    }
+
     void turno(){
         Jogador jogador=jogadores.get(jogadorAtual);
         int casaAntiga=jogador.getPontuacao();
@@ -187,10 +228,16 @@ public class Jogo {
             return;
         }
         int[] dados=jogador.andarCasa();
-        dado1.setText(String.valueOf(dados[0]));
-        dado2.setText(String.valueOf(dados[1]));
-        somaDados.setText(String.valueOf(dados[0]+dados[1]));
-        moverJogador(jogador, casaAntiga);
+        if(!modo_debug){
+            dado1.setText(String.valueOf(dados[0]));
+            dado2.setText(String.valueOf(dados[1]));
+            somaDados.setText(String.valueOf(dados[0]+dados[1]));
+            moverJogador(jogador, casaAntiga);
+        }else{
+            int casaAtual=modoDebug();
+            moverJogador(jogador, casaAntiga,casaAtual);
+            modo_debug=false;
+        }
         if (jogador.getPontuacao()>=39){
             mostrarPopUp("Vitória!!", "Jogador "+mostrarCor(jogador)+" venceu!!");
             jogoTerminou=true;
