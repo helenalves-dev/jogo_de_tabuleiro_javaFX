@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="QuantidadeJogadores">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #3E2A14;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="QuantidadeJogadores">
    <children>
-      <Label fx:id="nomeQuantidadeJogadores" layoutX="136.0" layoutY="86.0" text="Quantidade de jogadores" textFill="WHITE">
+      <Label fx:id="nomeQuantidadeJogadores" layoutX="136.0" layoutY="86.0" text="Quantidade de jogadores" textFill="#f5eedc">
          <font>
             <Font name="Broadway" size="24.0" />
          </font>
@@ -18,7 +18,7 @@
       <RadioButton fx:id="quatroJogadores" layoutX="258.0" layoutY="221.0" mnemonicParsing="false" text="4 Jogadores" textFill="WHITE" />
       <RadioButton fx:id="cincoJogadores" layoutX="258.0" layoutY="251.0" mnemonicParsing="false" text="5 Jogadores" textFill="WHITE" />
       <RadioButton fx:id="seisJogadores" layoutX="258.0" layoutY="282.0" mnemonicParsing="false" text="6 Jogadores" textFill="WHITE" />
-      <Button fx:id="continuar" layoutX="266.0" layoutY="327.0" mnemonicParsing="false" onAction="#continuar" text="Continuar" />
-      <Button fx:id="voltar" layoutX="26.0" layoutY="25.0" mnemonicParsing="false" onAction="#voltar" text="Voltar" />
+      <Button fx:id="continuar" layoutX="266.0" layoutY="327.0" mnemonicParsing="false" onAction="#continuar" style="-fx-background-color: #CDAA6D;" text="Continuar" />
+      <Button fx:id="voltar" layoutX="26.0" layoutY="25.0" mnemonicParsing="false" onAction="#voltar" style="-fx-background-color: #E5C07B;" text="Voltar" />
    </children>
 </Pane>

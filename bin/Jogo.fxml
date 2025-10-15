@@ -10,10 +10,10 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#debug" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Jogo">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#debug" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #3E2A14;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Jogo">
    <children>
-      <Button fx:id="proxJogador" layoutX="133.0" layoutY="322.0" mnemonicParsing="false" onAction="#proxJogador" text="Próximo Jogador" />
-      <GridPane fx:id="grid" gridLinesVisible="true" layoutX="25.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="222.0" prefWidth="377.0" style="-fx-background-color: WHITE;">
+      <Button fx:id="proxJogador" layoutX="133.0" layoutY="322.0" mnemonicParsing="false" onAction="#proxJogador" style="-fx-background-color: #CDAA6D;" text="Próximo Jogador" />
+      <GridPane fx:id="grid" gridLinesVisible="true" layoutX="25.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="222.0" prefWidth="377.0" style="-fx-background-color: #B7A57A;">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -32,12 +32,12 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
-      <VBox layoutX="413.0" layoutY="30.0" prefHeight="200.0" prefWidth="173.0">
+      <VBox layoutX="413.0" layoutY="30.0" prefHeight="200.0" prefWidth="173.0" style="-fx-background-color: #B7A57A;">
          <children>
-            <ListView fx:id="pontuacaoJogadores" prefHeight="200.0" prefWidth="136.0" />
+            <ListView fx:id="pontuacaoJogadores" prefHeight="200.0" prefWidth="136.0" style="-fx-background-color: #B7A57A;" />
          </children>
       </VBox>
-      <Button fx:id="jogarDados" layoutX="133.0" layoutY="322.0" mnemonicParsing="false" onAction="#jogarDados" text="Rolar Dados" />
+      <Button fx:id="jogarDados" layoutX="133.0" layoutY="322.0" mnemonicParsing="false" onAction="#jogarDados" style="-fx-background-color: #CDAA6D;" text="Rolar Dados" />
       <GridPane layoutX="339.0" layoutY="297.0" prefHeight="75.0" prefWidth="218.0" style="-fx-background-color: WHITE;">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -48,7 +48,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <GridPane alignment="CENTER" gridLinesVisible="true" style="-fx-alignment: CENTER;">
+            <GridPane alignment="CENTER" gridLinesVisible="true" style="-fx-alignment: CENTER; -fx-background-color: #CDAA6D;">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
@@ -57,14 +57,14 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" style="-fx-alignment: CENTER;" text="Dado 1" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" style="-fx-alignment: CENTER;" text="     Dado 1" />
                   <Label fx:id="dado1" text="Label" GridPane.rowIndex="1" />
                </children>
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </GridPane>
-            <GridPane alignment="CENTER" gridLinesVisible="true" style="-fx-alignment: CENTER;" GridPane.columnIndex="2">
+            <GridPane alignment="CENTER" gridLinesVisible="true" style="-fx-alignment: CENTER; -fx-background-color: #CDAA6D;" GridPane.columnIndex="2">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
@@ -73,11 +73,11 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Total" />
+                  <Label text="       Total" />
                   <Label fx:id="somaDados" text="Label" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <GridPane alignment="CENTER" gridLinesVisible="true" style="-fx-alignment: CENTER;" GridPane.columnIndex="1">
+            <GridPane alignment="CENTER" gridLinesVisible="true" style="-fx-alignment: CENTER; -fx-background-color: #B7A57A;" GridPane.columnIndex="1">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
@@ -86,7 +86,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Dado 2" />
+                  <Label text="     Dado 2" />
                   <Label fx:id="dado2" text="Label" GridPane.rowIndex="1" />
                </children>
             </GridPane>

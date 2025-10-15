@@ -253,9 +253,9 @@ public class Jogo {
         }
         int[] dados=jogador.andarCasa();
         if(!modo_debug){
-            dado1.setText(String.valueOf(dados[0]));
-            dado2.setText(String.valueOf(dados[1]));
-            somaDados.setText(String.valueOf(dados[0]+dados[1]));
+            dado1.setText("          "+String.valueOf(dados[0]));
+            dado2.setText("          "+String.valueOf(dados[1]));
+            somaDados.setText("          "+String.valueOf(dados[0]+dados[1]));
             moverJogador(jogador, casaAntiga);
         }else{
             int casaAtual=modoDebug();

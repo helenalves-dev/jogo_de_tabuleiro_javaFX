@@ -7,6 +7,8 @@ public abstract class Jogador extends Circle{
     private int pontuacao;
     public Jogador(Color cor, int turnosJogados, int pontuacao){
         setFill(cor);
+        setStroke(Color.BURLYWOOD);
+        setStrokeWidth(1);
         this.turnosJogados=turnosJogados;
         this.pontuacao=pontuacao;
         passaVez=false;
