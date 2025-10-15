@@ -20,6 +20,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 public class Jogo {
@@ -87,6 +88,7 @@ public class Jogo {
             casas.get(0).getChildren().add(jogadores.get(i));
             pontuacaoJogadores.getItems().addAll("Jogador "+mostrarCor(jogadores.get(i))+"|Turnos: "+jogadores.get(i).getTurnosJogados());
         }
+        mostrarPopUp("Turno Atual", "Jogador "+mostrarCor(jogadores.get(jogadorAtual)));
     }
 
     private Jogador redefinirJogador(Color cor, int turnosJogados, int pontuacao){
@@ -107,7 +109,10 @@ public class Jogo {
         jogarDados.setVisible(false);
         proxJogador.setVisible(true);
         if(jogoTerminou){
-            Parent root = FXMLLoader.load(getClass().getResource("TelaFinal.fxml"));
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("TelaFinal.fxml"));
+            Parent root = loader.load();
+            TelaFinal tela=loader.getController();
+            tela.initialize(jogadores);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -135,12 +140,15 @@ public class Jogo {
             modo_debug=true;
             turno();
             if(jogoTerminou){
-                Parent root = FXMLLoader.load(getClass().getResource("TelaFinal.fxml"));
+                FXMLLoader loader=new FXMLLoader(getClass().getResource("TelaFinal.fxml"));
+                Parent root = loader.load();
+                TelaFinal tela=loader.getController();
+                tela.initialize(jogadores);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
-            stage.show();
-        }
+                stage.show();
+            }
         }
         jogarDados.setVisible(false);
         proxJogador.setVisible(true);
@@ -210,13 +218,29 @@ public class Jogo {
 
     private void moverJogador(Jogador jogador, int casaAntiga){
         casas.get(casaAntiga).getChildren().remove(jogador);
+        for (Node node:casas.get(casaAntiga).getChildren()){
+            Circle player=(Circle) node;
+            player.setRadius(radius/casas.get(casaAntiga).getChildren().size());
+        }
         casas.get(jogador.getPontuacao()).getChildren().add(jogador);
+        for (Node node:casas.get(jogador.getPontuacao()).getChildren()){
+            Circle player=(Circle) node;
+            player.setRadius(radius/casas.get(jogador.getPontuacao()).getChildren().size());
+        }
     }
 
     private void moverJogador(Jogador jogador, int casaAntiga, int casaAtual){
         casas.get(casaAntiga).getChildren().remove(jogador);
+        for (Node node:casas.get(casaAntiga).getChildren()){
+            Circle player=(Circle) node;
+            player.setRadius(radius/casas.get(casaAntiga).getChildren().size());
+        }
         jogador.setPontuacao(casaAtual);
         casas.get(jogador.getPontuacao()).getChildren().add(jogador);
+        for (Node node:casas.get(jogador.getPontuacao()).getChildren()){
+            Circle player=(Circle) node;
+            player.setRadius(radius/casas.get(jogador.getPontuacao()).getChildren().size());
+        }
     }
 
     void turno(){
@@ -239,6 +263,7 @@ public class Jogo {
             modo_debug=false;
         }
         if (jogador.getPontuacao()>=39){
+            jogador.setTurnosJogados(jogador.getTurnosJogados()+1);
             mostrarPopUp("Vitória!!", "Jogador "+mostrarCor(jogador)+" venceu!!");
             jogoTerminou=true;
             return;

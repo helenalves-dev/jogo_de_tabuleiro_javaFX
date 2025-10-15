@@ -79,11 +79,11 @@ public class TelaTipoJogador {
             FXMLLoader loader=new FXMLLoader(getClass().getResource("Jogo.fxml"));
             Parent root = loader.load();
             Jogo telaJogo=loader.getController();
-            telaJogo.setJogadores(criarJogadores());
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
+            telaJogo.setJogadores(criarJogadores());
         }
         
     }

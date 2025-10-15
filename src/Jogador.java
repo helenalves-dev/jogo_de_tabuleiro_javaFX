@@ -11,6 +11,18 @@ public abstract class Jogador extends Circle{
         this.pontuacao=pontuacao;
         passaVez=false;
     }
+
+    public String getCor(){
+        Color cor=(Color)this.getFill();
+        if (cor.equals(Color.BLUE)) return "Azul";
+        if (cor.equals(Color.RED)) return "Vermelho";
+        if (cor.equals(Color.YELLOW)) return "Amarelo";
+        if (cor.equals(Color.GREEN)) return "Verde";
+        if (cor.equals(Color.ORANGE)) return "Laranja";
+        if (cor.equals(Color.PURPLE)) return "Roxo";
+        return "Erro";
+    }
+
     public int getTurnosJogados(){
         return turnosJogados;
     }
