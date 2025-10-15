@@ -19,5 +19,6 @@
       <RadioButton fx:id="cincoJogadores" layoutX="258.0" layoutY="251.0" mnemonicParsing="false" text="5 Jogadores" textFill="WHITE" />
       <RadioButton fx:id="seisJogadores" layoutX="258.0" layoutY="282.0" mnemonicParsing="false" text="6 Jogadores" textFill="WHITE" />
       <Button fx:id="continuar" layoutX="266.0" layoutY="327.0" mnemonicParsing="false" onAction="#continuar" text="Continuar" />
+      <Button fx:id="voltar" layoutX="26.0" layoutY="25.0" mnemonicParsing="false" onAction="#voltar" text="Voltar" />
    </children>
 </Pane>

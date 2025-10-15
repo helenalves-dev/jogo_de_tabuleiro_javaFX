@@ -14,6 +14,9 @@ public class QuantidadeJogadores {
     private int quantidadeDeJogadores;
 
     @FXML
+    private Button voltar;
+
+    @FXML
     private Label nomeQuantidadeJogadores;
 
     @FXML
@@ -69,6 +72,15 @@ public class QuantidadeJogadores {
             stage.setScene(scene);
             stage.show();
         }
+    }
+
+    @FXML
+    void voltar(ActionEvent event) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("TelaInicial.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 }

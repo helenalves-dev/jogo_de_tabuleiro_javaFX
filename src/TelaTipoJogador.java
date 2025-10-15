@@ -6,18 +6,26 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class TelaTipoJogador {
+
+    @FXML
+    private Label tipoJogador=new Label("Tipo de Jogador");
 
     @FXML
     private VBox vboxJogadores;
 
     @FXML
     private Button play;
+
+    @FXML
+    private Button voltar;
 
     private ArrayList<ChoiceBox<String>> choiceBoxes = new ArrayList<>();
 
@@ -31,9 +39,11 @@ public class TelaTipoJogador {
 
     // Cria dinamicamente uma ChoiceBox para cada jogador
     private void criarChoiceBoxes() {
+        tipoJogador.setFont(new Font("Broadway",30));
+        tipoJogador.setTextFill(Color.WHITE);
         vboxJogadores.getChildren().clear();
         choiceBoxes.clear();
-
+        vboxJogadores.getChildren().add(tipoJogador);
         for (int i = 1; i <= quantidadeJogadores; i++) {
             ChoiceBox<String> choiceBox = new ChoiceBox<>();
             choiceBox.getItems().addAll("Sortudo", "Azarado", "Normal");
@@ -47,6 +57,7 @@ public class TelaTipoJogador {
             vboxJogadores.getChildren().add(choiceBox);
         }
         vboxJogadores.getChildren().add(play);
+        vboxJogadores.getChildren().add(voltar);
     }
 
     private boolean jogadorDiferente(){
@@ -85,6 +96,14 @@ public class TelaTipoJogador {
             stage.show();
             telaJogo.setJogadores(criarJogadores());
         }
-        
+    }
+
+    @FXML
+    void voltar(ActionEvent event) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("QuantidadeJogadores.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }
