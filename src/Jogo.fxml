@@ -12,7 +12,8 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Jogo">
    <children>
-      <GridPane fx:id="grid" gridLinesVisible="true" layoutX="45.0" layoutY="41.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="222.0" prefWidth="377.0" style="-fx-background-color: WHITE;">
+      <Button fx:id="proxJogador" layoutX="133.0" layoutY="322.0" mnemonicParsing="false" onAction="#proxJogador" text="Próximo Jogador" />
+      <GridPane fx:id="grid" gridLinesVisible="true" layoutX="25.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="222.0" prefWidth="377.0" style="-fx-background-color: WHITE;">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -31,9 +32,9 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
-      <VBox layoutX="462.0" layoutY="52.0" prefHeight="200.0" prefWidth="100.0">
+      <VBox layoutX="413.0" layoutY="30.0" prefHeight="200.0" prefWidth="173.0">
          <children>
-            <ListView fx:id="pontuacaoJogadores" prefHeight="200.0" prefWidth="200.0" />
+            <ListView fx:id="pontuacaoJogadores" prefHeight="200.0" prefWidth="136.0" />
          </children>
       </VBox>
       <Button fx:id="jogarDados" layoutX="133.0" layoutY="322.0" mnemonicParsing="false" onAction="#jogarDados" text="Rolar Dados" />

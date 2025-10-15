@@ -18,6 +18,9 @@ public class JogadorAzarado extends Jogador{
             dados[1]=1+random.nextInt(6);
         }while (dados[0]+dados[1]>6);
         pontuacaoAtual=getPontuacao()+dados[0]+dados[1];
+        if(pontuacaoAtual>39){
+            pontuacaoAtual=39;
+        }
         setPontuacao(pontuacaoAtual);
         return dados;
     }

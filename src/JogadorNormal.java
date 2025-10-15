@@ -14,10 +14,15 @@ public class JogadorNormal extends Jogador {
   @Override
   public int[] andarCasa() {
     Random random = new Random();
+    int pontuacaoAtual;
     int dados[] = new int[2];
     dados[0] = 1 +  random.nextInt(6);
     dados[1] = 1 + random.nextInt(6);
-    setPontuacao(getPontuacao() + dados[0] + dados[1]);
+    pontuacaoAtual=getPontuacao() + dados[0] + dados[1];
+    if(pontuacaoAtual>39){
+      pontuacaoAtual=39;
+    }
+    setPontuacao(pontuacaoAtual);
     return dados;
   }
 }
