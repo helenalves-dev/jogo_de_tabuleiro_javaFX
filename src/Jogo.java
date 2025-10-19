@@ -23,7 +23,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
-public class Jogo {
+public class Jogo {//Implementação do jogo e regras
 
     @FXML
     private Label dado1;
@@ -59,7 +59,7 @@ public class Jogo {
     private int jogadorAtual=0;
 
     @FXML
-    public void initialize(){
+    public void initialize(){//Cria o tabuleiro
         for(int i=0;i<5;i++){
             if((i%2)==0){
                 for(int j=0;j<8;j++){
@@ -81,17 +81,17 @@ public class Jogo {
         somaDados.setText(" ");
     }
 
-    void setJogadores(ArrayList <Jogador> jogadores){
+    void setJogadores(ArrayList <Jogador> jogadores){//Organiza os jogadores no tabuleiro
         this.jogadores=jogadores;
         for (int i=0;i<jogadores.size();i++){
             jogadores.get(i).setRadius(radius/jogadores.size()-1);
             casas.get(0).getChildren().add(jogadores.get(i));
             pontuacaoJogadores.getItems().addAll("Jogador "+mostrarCor(jogadores.get(i))+"|Turnos: "+jogadores.get(i).getTurnosJogados());
         }
-        mostrarPopUp("Turno Atual", "Jogador "+mostrarCor(jogadores.get(jogadorAtual)));
+        mostrarPopUp("Turno Atual", "Jogador "+mostrarCor(jogadores.get(jogadorAtual)));//Pop-up que avisa quem é o jogador atual
     }
 
-    private Jogador redefinirJogador(Color cor, int turnosJogados, int pontuacao){
+    private Jogador redefinirJogador(Color cor, int turnosJogados, int pontuacao){//Redefine o tipo do jogador, em casas específicas
         Random random=new Random();
         int tipo=random.nextInt(3);
         if (tipo==0){
@@ -104,11 +104,11 @@ public class Jogo {
     }
 
     @FXML
-    void jogarDados(ActionEvent event) throws Exception{
+    void jogarDados(ActionEvent event) throws Exception{//Botão que rola os dados
         turno();
         jogarDados.setVisible(false);
         proxJogador.setVisible(true);
-        if(jogoTerminou){
+        if(jogoTerminou){//Se o usuário atingir o fim do jogo, muda a tela para a Tela Final
             FXMLLoader loader=new FXMLLoader(getClass().getResource("TelaFinal.fxml"));
             Parent root = loader.load();
             TelaFinal tela=loader.getController();
@@ -121,7 +121,7 @@ public class Jogo {
     }
 
     @FXML
-    void proxJogador(ActionEvent event) {
+    void proxJogador(ActionEvent event) {//Espera pelo próximo jogador
         dado1.setText(" ");
         dado2.setText(" ");
         somaDados.setText(" ");
@@ -131,15 +131,15 @@ public class Jogo {
         }
         proxJogador.setVisible(false);
         jogarDados.setVisible(true);
-        mostrarPopUp("Turno Atual", "Jogador "+mostrarCor(jogadores.get(jogadorAtual)));
+        mostrarPopUp("Turno Atual", "Jogador "+mostrarCor(jogadores.get(jogadorAtual)));//Mostrar quem é o próximo jogador
     }
 
     @FXML
-    void debug(KeyEvent event) throws Exception{
+    void debug(KeyEvent event) throws Exception{//Modo debug, ativado ao apertar a tecla d
         if(event.getCode()==KeyCode.D){
             modo_debug=true;
             turno();
-            if(jogoTerminou){
+            if(jogoTerminou){//Se o usuário chegar na última casa, passa para a Tela Final
                 FXMLLoader loader=new FXMLLoader(getClass().getResource("TelaFinal.fxml"));
                 Parent root = loader.load();
                 TelaFinal tela=loader.getController();
@@ -154,7 +154,7 @@ public class Jogo {
         proxJogador.setVisible(true);
     }
 
-    private void mostrarPopUp(String titulo, String mensagem) {
+    private void mostrarPopUp(String titulo, String mensagem) {//Método utilizado para criar a estrutura do pop-ups que são utilizados ao longo do código
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle(titulo);
         alert.setHeaderText(null); // sem título interno
@@ -162,7 +162,7 @@ public class Jogo {
         alert.showAndWait();
     }
 
-    private int modoDebug(){
+    private int modoDebug(){//Pop-up que recebe a casa que o usuário vai
         Alert alert=new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Modo Debug");
         alert.setHeaderText("Insira a casa que deseja ir: ");
@@ -175,7 +175,7 @@ public class Jogo {
         return selecionado;
     }
 
-    private int jogadorParaInicio(Jogador jogador){
+    private int jogadorParaInicio(Jogador jogador){//Jogador selecionado volta ao início, ativado em casas específicas
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Casa Especial");
         alert.setHeaderText("Escolha um jogador para voltar para o início: ");
@@ -205,7 +205,7 @@ public class Jogo {
         return selecionado;
     }
 
-    private String mostrarCor(Jogador jogador){
+    private String mostrarCor(Jogador jogador){//Transforma a cor do usuário em uma String 
         Color cor=(Color)jogador.getFill();
         if (cor.equals(Color.BLUE)) return "Azul";
         if (cor.equals(Color.RED)) return "Vermelho";
@@ -216,7 +216,7 @@ public class Jogo {
         return "Erro";
     }
 
-    private void moverJogador(Jogador jogador, int casaAntiga){
+    private void moverJogador(Jogador jogador, int casaAntiga){//Move o jogador pelas casas do tabuleiro e adapta o tamanho dos jogadores
         casas.get(casaAntiga).getChildren().remove(jogador);
         for (Node node:casas.get(casaAntiga).getChildren()){
             Circle player=(Circle) node;
@@ -229,7 +229,7 @@ public class Jogo {
         }
     }
 
-    private void moverJogador(Jogador jogador, int casaAntiga, int casaAtual){
+    private void moverJogador(Jogador jogador, int casaAntiga, int casaAtual){//Move o jogador pelas casas do tabuleiro e adapta o tamanho dos jogadores
         casas.get(casaAntiga).getChildren().remove(jogador);
         for (Node node:casas.get(casaAntiga).getChildren()){
             Circle player=(Circle) node;
@@ -243,7 +243,7 @@ public class Jogo {
         }
     }
 
-    void turno(){
+    void turno(){//Implementação da lógica do jogo
         Jogador jogador=jogadores.get(jogadorAtual);
         int casaAntiga=jogador.getPontuacao();
         if(jogador.getPassaVez()){

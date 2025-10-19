@@ -10,7 +10,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
-public class QuantidadeJogadores {
+public class QuantidadeJogadores {//Define a quantidade de jogadores
     private int quantidadeDeJogadores;
 
     @FXML
@@ -38,7 +38,7 @@ public class QuantidadeJogadores {
     private Button continuar;
     
     @FXML
-    public void initialize() {
+    public void initialize() {//Inicializa os radioButtons com a quantidade de jogadores
         ToggleGroup grupo = new ToggleGroup();
 
         doisJogadores.setToggleGroup(grupo);
@@ -47,6 +47,7 @@ public class QuantidadeJogadores {
         cincoJogadores.setToggleGroup(grupo);
         seisJogadores.setToggleGroup(grupo);
 
+        //Atribui a cada botão o valor de jogadores para ser passado para a próxima tela
         doisJogadores.setUserData(2);
         tresJogadores.setUserData(3);
         quatroJogadores.setUserData(4);
@@ -58,10 +59,10 @@ public class QuantidadeJogadores {
                 quantidadeDeJogadores = (int) grupo.getSelectedToggle().getUserData();
             }
         });
-        doisJogadores.setSelected(true);
+        doisJogadores.setSelected(true);//O botão de 2 jogadores já fica pré-selecionado
     }
     @FXML
-    void continuar(ActionEvent event) throws Exception {
+    void continuar(ActionEvent event) throws Exception {//Passa para a próxima tela, no caso a Tela Tipo Jogador
         if (quantidadeDeJogadores!=0){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("TelaTipoJogador.fxml"));
             Parent root = loader.load();
@@ -75,7 +76,7 @@ public class QuantidadeJogadores {
     }
 
     @FXML
-    void voltar(ActionEvent event) throws Exception{
+    void voltar(ActionEvent event) throws Exception{//Volta para a tela anterior, no caso, a Tela Inicial
         Parent root = FXMLLoader.load(getClass().getResource("TelaInicial.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);

@@ -19,15 +19,15 @@ public class TelaInicial {
     private Button Sair;
 
     @FXML
-    void iniciarJogo(ActionEvent event) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("QuantidadeJogadores.fxml"));
+    void iniciarJogo(ActionEvent event) throws Exception {//Botão para iniciar o jogo
+        Parent root = FXMLLoader.load(getClass().getResource("QuantidadeJogadores.fxml"));//Indica a próxima tela
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    private boolean confirmacaoSair(){
+    private boolean confirmacaoSair(){//Pop-up para verificar se o usuário deseja sair e fechar o jogo
         Alert alert=new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Confimação de Saída");
         alert.setHeaderText("Deseja realmente sair do jogo?");
@@ -38,7 +38,7 @@ public class TelaInicial {
     }
 
     @FXML
-    void sair(ActionEvent event) {
+    void sair(ActionEvent event) {//Fecha o jogo
         if(confirmacaoSair()){
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();

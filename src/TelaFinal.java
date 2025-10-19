@@ -14,7 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class TelaFinal {
+public class TelaFinal {//Mostras as estatíticas do jogo, apresentando os jogadores, quantos turnos jogaram e qual foi sua última casa(Pontuação)
 
     @FXML
     private TableView<Jogador> estatisticas;
@@ -35,7 +35,7 @@ public class TelaFinal {
     private Button voltaTelaInicial;
 
     @FXML
-    public void initialize(ArrayList<Jogador> jogador){
+    public void initialize(ArrayList<Jogador> jogador){//Tabela com estatíticas
         jogadores.setCellValueFactory(new PropertyValueFactory<>("cor"));
         pontuacao.setCellValueFactory(new PropertyValueFactory<>("pontuacao"));
         turnos.setCellValueFactory(new PropertyValueFactory<>("turnosJogados"));
@@ -46,7 +46,7 @@ public class TelaFinal {
     }
 
 
-    private boolean confirmacaoSair(){
+    private boolean confirmacaoSair(){//Pop-up que confirma se o jogador gostaria de sair e fechar o jogo
         Alert alert=new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Confimação de Saída");
         alert.setHeaderText("Deseja realmente sair do jogo?");
@@ -57,7 +57,7 @@ public class TelaFinal {
     }
 
     @FXML
-    void sair(ActionEvent event) {
+    void sair(ActionEvent event) {//Fecha o jogo
         if(confirmacaoSair()){
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
@@ -65,7 +65,7 @@ public class TelaFinal {
     }
 
     @FXML
-    void voltarTelaInicial(ActionEvent event) throws Exception {
+    void voltarTelaInicial(ActionEvent event) throws Exception {//Retorna para a Tela Inicial
         Parent root = FXMLLoader.load(getClass().getResource("TelaInicial.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
