@@ -1,28 +1,27 @@
 import java.util.Random;
-import javafx.scene.paint.Color;
 
 public class JogadorNormal extends Jogador {
 
-  public JogadorNormal(Color cor, int turnosJogados, int pontuacao) {
+  public JogadorNormal(Cores cor, int turnosJogados, int pontuacao) {
     super(cor, turnosJogados, pontuacao);
   }
 
-  public JogadorNormal(Color cor) {
+  public JogadorNormal(Cores cor) {
     super(cor, 0, 0);
   }
 
   @Override
-  public int[] andarCasa() {
+  public int[] jogarDados() {
     Random random = new Random();
     int pontuacaoAtual;
     int dados[] = new int[2];
     dados[0] = 1 +  random.nextInt(6);
     dados[1] = 1 + random.nextInt(6);
     pontuacaoAtual=getPontuacao() + dados[0] + dados[1];
-    if(pontuacaoAtual>39){
-      pontuacaoAtual=39;
-    }
     setPontuacao(pontuacaoAtual);
+    if(dados[0]!=dados[1]){
+      setTurnosJogados(getTurnosJogados()+1);
+    }
     return dados;
   }
 }
