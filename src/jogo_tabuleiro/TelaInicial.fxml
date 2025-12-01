@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2B1D0E;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TelaInicial">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2B1D0E;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jogo_tabuleiro.TelaInicial">
    <children>
       <Button fx:id="IniciarJogo" layoutX="190.0" layoutY="339.0" mnemonicParsing="false" onAction="#iniciarJogo" style="-fx-background-color: #CDAA6D;" text="Novo Jogo" />
       <Button fx:id="Sair" layoutX="354.0" layoutY="339.0" mnemonicParsing="false" onAction="#sair" style="-fx-background-color: #CDAA6D;" text="Sair" />
