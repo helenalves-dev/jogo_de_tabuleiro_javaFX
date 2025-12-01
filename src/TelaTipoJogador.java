@@ -72,14 +72,13 @@ public class TelaTipoJogador {//O usuário define qual tipo de jogador deseja se
 
     private ArrayList<Jogador> criarJogadores(){//Cria os jogadores que serão apresentados na próxima tela, no tabuleiro
         ArrayList<Jogador> jogadores=new ArrayList<>();
-        Color[] cores={Color.BLUE, Color.RED, Color.YELLOW, Color.GREEN, Color.ORANGE, Color.PURPLE};
         for (int i=0;i<quantidadeJogadores;i++){
             if(choiceBoxes.get(i).getValue().equals("Sortudo")){
-                jogadores.add(new JogadorSortudo(cores[i]));
+                jogadores.add(new JogadorSortudo(Cores.values()[i]));
             }else if(choiceBoxes.get(i).getValue().equals("Azarado")){
-                jogadores.add(new JogadorAzarado(cores[i]));
+                jogadores.add(new JogadorAzarado(Cores.values()[i]));
             }else{
-                jogadores.add(new JogadorNormal(cores[i]));
+                jogadores.add(new JogadorNormal(Cores.values()[i]));
             }
         }
         return jogadores;

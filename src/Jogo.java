@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Random;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,15 +10,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
@@ -86,21 +82,9 @@ public class Jogo {//Implementação do jogo e regras
         for (int i=0;i<jogadores.size();i++){
             jogadores.get(i).setRadius(radius/jogadores.size()-1);
             casas.get(0).getChildren().add(jogadores.get(i));
-            pontuacaoJogadores.getItems().addAll("Jogador "+mostrarCor(jogadores.get(i))+"|Turnos: "+jogadores.get(i).getTurnosJogados());
+            pontuacaoJogadores.getItems().addAll("Jogador "+jogadores.get(i).getCor().colorName+"|Turnos: "+jogadores.get(i).getTurnosJogados());
         }
-        mostrarPopUp("Turno Atual", "Jogador "+mostrarCor(jogadores.get(jogadorAtual)));//Pop-up que avisa quem é o jogador atual
-    }
-
-    private Jogador redefinirJogador(Color cor, int turnosJogados, int pontuacao){//Redefine o tipo do jogador, em casas específicas
-        Random random=new Random();
-        int tipo=random.nextInt(3);
-        if (tipo==0){
-            return new JogadorSortudo(cor,turnosJogados,pontuacao);
-        }else if(tipo==1){
-            return new JogadorNormal(cor,turnosJogados,pontuacao);
-        }else{
-            return new JogadorAzarado(cor,turnosJogados,pontuacao);
-        }
+        mostrarPopUp("Turno Atual", "Jogador "+jogadores.get(jogadorAtual).getCor().colorName);//Pop-up que avisa quem é o jogador atual
     }
 
     @FXML
@@ -127,11 +111,11 @@ public class Jogo {//Implementação do jogo e regras
         somaDados.setText(" ");
         pontuacaoJogadores.getItems().clear();
         for (int i=0;i<jogadores.size();i++){
-            pontuacaoJogadores.getItems().addAll("Jogador "+mostrarCor(jogadores.get(i))+"|Turnos: "+jogadores.get(i).getTurnosJogados());
+            pontuacaoJogadores.getItems().addAll("Jogador "+jogadores.get(i).getCor().colorName+"|Turnos: "+jogadores.get(i).getTurnosJogados());
         }
         proxJogador.setVisible(false);
         jogarDados.setVisible(true);
-        mostrarPopUp("Turno Atual", "Jogador "+mostrarCor(jogadores.get(jogadorAtual)));//Mostrar quem é o próximo jogador
+        mostrarPopUp("Turno Atual", "Jogador "+jogadores.get(jogadorAtual).getCor().colorName);//Mostrar quem é o próximo jogador
     }
 
     @FXML
@@ -175,60 +159,6 @@ public class Jogo {//Implementação do jogo e regras
         return selecionado;
     }
 
-    private int jogadorParaInicio(Jogador jogador){//Jogador selecionado volta ao início, ativado em casas específicas
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Casa Especial");
-        alert.setHeaderText("Escolha um jogador para voltar para o início: ");
-        ToggleGroup grupo=new ToggleGroup();
-        ArrayList<RadioButton> opcoes=new ArrayList<>();
-        int jogadorIndex=0;
-        for (Jogador player:jogadores){
-            if(player==jogador){
-                jogadorIndex++;
-                continue;
-            }else{
-                RadioButton opcaoJogador=new RadioButton("Jogador "+mostrarCor(player));
-                opcaoJogador.setUserData(jogadorIndex);
-                opcoes.add(opcaoJogador);
-                opcaoJogador.setToggleGroup(grupo);
-                jogadorIndex++;
-            }
-        }
-        opcoes.get(0).setSelected(true);
-        VBox vbox=new VBox();
-        for(RadioButton opcao:opcoes){
-            vbox.getChildren().add(opcao);
-        }
-        alert.getDialogPane().setContent(vbox);
-        alert.showAndWait();
-        int selecionado=(int) grupo.getSelectedToggle().getUserData();
-        return selecionado;
-    }
-
-    private String mostrarCor(Jogador jogador){//Transforma a cor do usuário em uma String 
-        Color cor=(Color)jogador.getFill();
-        if (cor.equals(Color.BLUE)) return "Azul";
-        if (cor.equals(Color.RED)) return "Vermelho";
-        if (cor.equals(Color.YELLOW)) return "Amarelo";
-        if (cor.equals(Color.GREEN)) return "Verde";
-        if (cor.equals(Color.ORANGE)) return "Laranja";
-        if (cor.equals(Color.PURPLE)) return "Roxo";
-        return "Erro";
-    }
-
-    private void moverJogador(Jogador jogador, int casaAntiga){//Move o jogador pelas casas do tabuleiro e adapta o tamanho dos jogadores
-        casas.get(casaAntiga).getChildren().remove(jogador);
-        for (Node node:casas.get(casaAntiga).getChildren()){
-            Circle player=(Circle) node;
-            player.setRadius(radius/casas.get(casaAntiga).getChildren().size());
-        }
-        casas.get(jogador.getPontuacao()).getChildren().add(jogador);
-        for (Node node:casas.get(jogador.getPontuacao()).getChildren()){
-            Circle player=(Circle) node;
-            player.setRadius(radius/casas.get(jogador.getPontuacao()).getChildren().size());
-        }
-    }
-
     private void moverJogador(Jogador jogador, int casaAntiga, int casaAtual){//Move o jogador pelas casas do tabuleiro e adapta o tamanho dos jogadores
         casas.get(casaAntiga).getChildren().remove(jogador);
         for (Node node:casas.get(casaAntiga).getChildren()){
@@ -249,14 +179,19 @@ public class Jogo {//Implementação do jogo e regras
         if(jogador.getPassaVez()){
             mostrarPopUp("Perdeu a Vez", "Jogue na próxima rodada!");
             jogador.setPassaVez(false);
+            if (jogadorAtual<jogadores.size()-1){
+                jogadorAtual++;
+            }else{
+                jogadorAtual=0;
+            }
             return;
         }
-        int[] dados=jogador.andarCasa();
+        int[] dados=jogador.jogarDados();
         if(!modo_debug){
-            dado1.setText("          "+String.valueOf(dados[0]));
-            dado2.setText("          "+String.valueOf(dados[1]));
-            somaDados.setText("          "+String.valueOf(dados[0]+dados[1]));
-            moverJogador(jogador, casaAntiga);
+            dado1.setText("\t  "+String.valueOf(dados[0]));
+            dado2.setText("\t  "+String.valueOf(dados[1]));
+            somaDados.setText("\t  "+String.valueOf(dados[0]+dados[1]));
+            moverJogador(jogador, casaAntiga, jogador.getPontuacao());
         }else{
             int casaAtual=modoDebug();
             moverJogador(jogador, casaAntiga,casaAtual);
@@ -264,7 +199,7 @@ public class Jogo {//Implementação do jogo e regras
         }
         if (jogador.getPontuacao()>=39){
             jogador.setTurnosJogados(jogador.getTurnosJogados()+1);
-            mostrarPopUp("Vitória!!", "Jogador "+mostrarCor(jogador)+" venceu!!");
+            mostrarPopUp("Vitória!!", "Jogador "+jogador.getCor().colorName+" venceu!!");
             jogoTerminou=true;
             return;
         }
@@ -272,52 +207,10 @@ public class Jogo {//Implementação do jogo e regras
             mostrarPopUp("Dados Iguais!", "Você pode jogar de novo!");
             return;
         }
-        switch(jogador.getPontuacao()){
-            case 5:
-            case 15:
-            case 30:
-                casaAntiga=jogador.getPontuacao();
-                mostrarPopUp("Casa Especial", "Você pode avançar +3 casas");
-                jogador.setPontuacao(jogador.getPontuacao()+3);
-                moverJogador(jogador, casaAntiga);
-                break;
-            case 10:
-            case 25:
-            case 38:
-                mostrarPopUp("Casa Especial", "Você perdeu seu próximo turno");
-                jogador.setPassaVez(true);
-                break;
-            case 13:
-                mostrarPopUp("Casa Especial", "Redefinindo Jogador");
-                jogador=redefinirJogador((Color) jogador.getFill(),jogador.getTurnosJogados(),jogador.getPontuacao());
-                mostrarPopUp("Casa Especial", "Você agora é um "+jogador.getClass());
-                System.out.println("---Você agora é um "+jogador.getClass()+"---");
-                break;
-            case 17:
-            case 27:
-                int jogadorEscolhidoIndex=jogadorParaInicio(jogador);
-                casaAntiga=jogadores.get(jogadorEscolhidoIndex).getPontuacao();
-                jogadores.get(jogadorEscolhidoIndex).setPontuacao(0);
-                moverJogador(jogadores.get(jogadorEscolhidoIndex), casaAntiga);
-                break;
-            case 20:
-            case 35:
-                mostrarPopUp("Casa Especial", "Troque de lugar com o jogador na última posição");
-                int menorPontuacao=0;
-                int menorPontuacaoIndex=0;
-                for (int k=0;k<jogadores.size();k++){
-                    if(k==0){
-                        menorPontuacao=jogadores.get(k).getPontuacao();
-                    }else if(jogadores.get(k).getPontuacao()<menorPontuacao){
-                        menorPontuacao=jogadores.get(k).getPontuacao();
-                        menorPontuacaoIndex=k;
-                    }
-                }
-                jogadores.get(menorPontuacaoIndex).setPontuacao(jogador.getPontuacao());
-                jogador.setPontuacao(menorPontuacao);
-                break;
+        CasasEspeciais casaEspecial = CasasEspeciais.fromCasa(jogador.getPontuacao());
+        if (casaEspecial != null) {
+            casaEspecial.executar(jogadores, jogadorAtual, casas);
         }
-        jogador.setTurnosJogados(jogador.getTurnosJogados()+1);
         if (jogadorAtual<jogadores.size()-1){
             jogadorAtual++;
         }else{

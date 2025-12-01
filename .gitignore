@@ -1,0 +1,5 @@
+sonar-project.properties
+.scannerwork/report-task.txt
+.scannerwork/.sonar_lock
+.vscode/launch.json
+.vscode/settings.json
