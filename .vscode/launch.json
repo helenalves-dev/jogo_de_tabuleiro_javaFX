@@ -10,7 +10,7 @@
             "name": "Launch JavaFX App",
             "request": "launch",
             "mainClass": "App",  // Substitua pelo nome da sua classe principal
-            "vmArgs": "--module-path \"C:\\Program Files\\Java\\Java libs\\javafx-sdk-25\\lib\" --add-modules javafx.controls,javafx.fxml"
+            "vmArgs": "--module-path \"C:/Users/Windows 11/Desktop/Helen/POO/javafx-sdk-21.0.9\\lib\" --add-modules javafx.controls,javafx.fxml"
         },
         {
             "type": "java",
